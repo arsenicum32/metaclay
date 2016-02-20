@@ -1,65 +1,81 @@
 (function(){
-  window.planets = [];
   function addPlanet(orb , pla){
-    var orbit = svg.append('circle').attr({
-      "cx": x/2,
-      "cy": y/2,
-      "stroke": "#eee",
-      "stroke-width": "3",
-      "fill": "white",
-      "r": orb.r
-    });
-
-    planets.push(function(){
-      orbit.attr({
+    if(orb.draw){
+      var orbit = svg.append('circle').attr({
         "cx": x/2,
         "cy": y/2,
+        "stroke": "#eee",
+        "stroke-width": "3",
+        "fill": "none",
         "r": orb.r
       });
-    });
-    var timer = 0;
-    var intervalRotation;
 
-    var planet = svg.append('circle').attr({
-      "cx": x/2,
-      "cy": y/2 + orb.r,
-      "stroke": "#333",
-      "stroke-width": "3",
-      "fill": "#ccc",
-      "r": pla.r || 30
-    });
-
-    function setRotation(){
-      intervalRotation = setInterval(function(){
-        timer+=0.01;
-        planet.attr({
-          "cx": x/2 + Math.cos(timer*(pla.speed||1))*orb.r,
-          "cy": y/2 + Math.sin(timer*(pla.speed||1))*orb.r
+      planets.push(function(){
+        orbit.attr({
+          "cx": x/2,
+          "cy": y/2,
+          "r": orb.r
         });
+      });
+    }
+    var timer = [];
+    var intervalRotation;
+    var planet = [];
+
+    for(var i in pla){
+      timer.push((pla[i].start || 0));
+
+      planet.push(svg.append('circle').attr({
+        "cx": x/2,
+        "cy": y/2 + orb.r,
+        "stroke": "#333",
+        "stroke-width": "3",
+        "fill": "#ccc",
+        "name": "planet"+i,
+        "r": pla[i].r || 30
+      }));
+    }
+
+    function setRotation(set){
+      intervalRotation = setInterval(function(){
+        for(var n in planet){
+          timer[n]+=0.01;
+          planet[n].attr({
+            "cx": x/2 + Math.cos(timer[n]*(pla[n].speed||1))*orb.r,
+            "cy": y/2 + Math.sin(timer[n]*(pla[n].speed||1))*orb.r
+          });
+        }
       }, 10);
     }
 
     setRotation();
 
-    planet.on('mouseover', function(){
-      clearInterval(intervalRotation);
-      planet.attr({
-        "r": pla.r*1.4 || 50
+    for(var i in planet){
+      planet[i].on('mouseover', function(){
+        var current = pla[i].r || 30;
+        clearInterval(intervalRotation);
+        $(this).attr({
+          "r": current*1.4
+        });
       });
-    });
-    planet.on('mouseout', function(){
-      setRotation();
-      planet.attr({
-        "r": pla.r || 30
+      planet[i].on('mouseout', function(e){
+        var current = pla[i].r || 30;
+        setRotation();
+        $(this).attr({
+          "r": current
+        });
       });
-    });
+    }
 
   }
 
-  addPlanet({r: x/4} , {r: 14, speed: 0.5});
-  addPlanet({r: x/5} , {r: 15, speed: 0.35});
-  addPlanet({r: x/6.5} , {r: 20, speed: -0.65});
-  addPlanet({r: x/9} , {r: 16, speed: 1.25});
+  var pi = 3.14;
+  addPlanet({r: x/6, draw: true} ,
+    [{r: 16, speed: 0.25, start: pi*2},
+     {r: 16, speed: 0.25, start: pi*4},
+     {r: 16, speed: 0.25, start: pi*6},
+     {r: 16, speed: 0.25, start: pi*8}
+    ]);
 
   // window.orbit = svg.append('circle').attr({
   //   "cx": x/2,

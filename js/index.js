@@ -6,6 +6,10 @@
     height: y
   });
 
+  window.objs = [];
+  window.planets = [];
+  window.intervals = [];
+
   $(window).on('resize load', function() {
     x = $(window).width();
     y = $(window).height();
@@ -14,16 +18,6 @@
     for(var i in planets){
       planets[i]();
     }
-
-    // orbit.attr({
-    //   "cx": x/2,
-    //   "cy": y/2,
-    //   "r": x/7
-    // });
-    // orbit.planet.attr({
-    //   "cx": x/2,
-    //   "cy": y/2+x/7
-    // });
   });
 
 })();
