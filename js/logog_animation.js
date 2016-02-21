@@ -3,7 +3,8 @@
     return a/2 + Math.floor(Math.random() * -1) * Math.floor( Math.random() * a);
   }
 
-  window.logog = svg.append('g');
+  window.logog = navpanel.append('g');
+
 
   var path1 = logog.append("path").attr({
     class: " st3 ",

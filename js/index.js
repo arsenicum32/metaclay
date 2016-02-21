@@ -8,7 +8,7 @@
 
   window.objs = [];
   window.planets = [];
-  window.intervals = [];
+  window.navpanel = svg.append('g');
 
   $(window).on('resize load', function() {
     x = $(window).width();
