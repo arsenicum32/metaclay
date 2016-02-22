@@ -78,5 +78,15 @@
 
   $('.otdel-items').map(function(){
     console.log($(this));
+  });
+
+  $('.otdel-items').on({
+    'mouseover': function(e){
+      fullinfopanel.style("visibility", "visible");
+      fullinfopanel.style("top", "0px").style("left",(e.pageX+ ( clickpos(e.pageX,e.pageY)[0]? -10-x/2: 10 ) )+"px");
+    },
+    'mouseout': function(){
+      fullinfopanel.style("visibility", "hidden");
+    }
   })
 })();

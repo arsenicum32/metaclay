@@ -10,6 +10,14 @@ body{
   background: yellow;
   padding: 12px;
 }
+.fullinfopanel{
+  position:absolute;
+  z-index:10;
+  visibility:hidden;
+  background: yellow;
+  width: 50vw;
+  height: 100vh;
+}
 .st1{fill:#F7C059;}
 .st2{fill:#FFFFFF;}
 .st3{fill:#4A96CD;}
