@@ -1,6 +1,14 @@
 body{
   margin:0;
   overflow: hidden;
+  font-family: Gill Sans;
+}
+.tooltip{
+  position:absolute;
+  z-index:10;
+  visibility:hidden;
+  background: yellow;
+  padding: 12px;
 }
 .st1{fill:#F7C059;}
 .st2{fill:#FFFFFF;}

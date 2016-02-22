@@ -8,6 +8,7 @@
 
   window.objs = [];
   window.planets = [];
+  window.stage = svg.append('g').attr('visibility','hidden');
   window.navpanel = svg.append('g');
 
   $(window).on('resize load', function() {

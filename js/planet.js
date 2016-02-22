@@ -60,6 +60,7 @@
           "r": current*1.4
         });
 
+        return tooltip.style("visibility", "visible");
       });
       planet[i].on('click', function(){
         var i=1;
@@ -68,7 +69,13 @@
           navpanel.attr({
             "transform": "scale( "+i+" "+i+") translate(0 0)"
           });
+          stage.attr('visibility',"visible");
         },10);
+
+        //drawPath.draw([[$(this).attr('cx'),$(this).attr('cy')],[200,200],[300,300]]); /////////////////////////////////////////
+      });
+      planet[i].on('mousemove', function(){
+        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
       });
       planet[i].on('mouseout', function(){
         var current = pla[i].r || 30;
@@ -76,10 +83,13 @@
         $(this).attr({
           "r": current
         });
+
+        return tooltip.style("visibility", "hidden");
       });
     }
 
   }
+
 
   var pi = 3.14;
   addPlanet({r: x/6 , draw: true} ,
@@ -88,6 +98,7 @@
      {r: 16, speed: 0.25, start: pi*6},
      {r: 16, speed: 0.25, start: pi*8}
     ]);
+
 
   // window.orbit = svg.append('circle').attr({
   //   "cx": x/2,
