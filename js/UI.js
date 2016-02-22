@@ -5,7 +5,7 @@
 
   window.fullinfopanel = d3.select("body")
     .append("div").attr('class', 'fullinfopanel')
-    .text("helllo");
+    .html("<h1>hello</h1>");
 
   window.clickpos = function(x, y) {
     var w = $(window).width(),

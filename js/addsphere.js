@@ -24,6 +24,11 @@
       "class": "otdel-items",
       "r": r || x/15
     });
+    var tmrca = 0;
+    var createanim  = setInterval(function(){
+      tmrca<(r || x/15)?tmrca+=0.55:clearInterval(createanim);
+      atom.attr('r', tmrca);
+    },10);
     var timer = 0;
     var startx = parseInt(atom.attr("cx"));
     var starty = parseInt(atom.attr("cy"));

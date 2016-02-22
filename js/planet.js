@@ -52,25 +52,39 @@
 
     setRotation();
 
+    var clickcount = 0;
+
     for(var i in planet){
       planet[i].on('mouseover', function(){
         var current = pla[i].r || 30;
         clearInterval(intervalRotation);
         $(this).attr({
-          "r": current*1.4
+          "r": current*2.4
         });
 
         return tooltip.style("visibility", "visible");
       });
+
       planet[i].on('click', function(){
-        var i=1;
-        var inter = setInterval( function(){
-          i>0.35?i-=0.05:clearInterval(inter);
-          navpanel.attr({
-            "transform": "scale( "+i+" "+i+") translate(0 0)"
-          });
-          stage.attr('visibility',"visible");
-        },10);
+        clickcount++;
+        if(clickcount===1){
+          var scale=1;
+          var inter = setInterval( function(){
+            scale>0.35?scale-=0.05:clearInterval(inter);
+            navpanel.attr({
+              "transform": "scale( "+scale+" "+scale+") translate(0 0)"
+            });
+            stage.attr('visibility',"visible");
+          },10);
+        }else{
+          var tmr = 0;
+          var inter = setInterval( function(){
+            tmr<0.5?tmr+=0.005:clearInterval(inter);
+            for(var n in timer){
+              timer[n]+=tmr;
+            }
+          },10);
+        }
 
         //drawPath.draw([[$(this).attr('cx'),$(this).attr('cy')],[200,200],[300,300]]); /////////////////////////////////////////
       });
@@ -92,7 +106,7 @@
 
 
   var pi = 3.14;
-  addPlanet({r: x/6 , draw: true} ,
+  addPlanet({r: 100 , draw: true} ,  // r = x/6
     [{r: 16, speed: 0.25, start: pi*2},
      {r: 16, speed: 0.25, start: pi*4},
      {r: 16, speed: 0.25, start: pi*6},
