@@ -1,0 +1,47 @@
+.body
+  width 100vw
+  height 100vh
+  display flex
+  align-items center
+  justify-content center
+.block
+  cursor pointer
+  position absolute
+  top 10px
+  right 10px
+  max-width 160px
+.main
+  width 50vw
+  height 80vh
+  img
+    width 50%
+    border-radius 50%
+    box-shadow 30px 10px 50px rgba(0,0,0,0.5)
+    transition all 0.2s
+.left
+  cursor pointer
+  float left
+  width 50%
+  height 50%
+  text-align center
+  display flex
+  align-items center
+  justify-content center
+  flex-direction column
+.right
+  cursor pointer
+  float right
+  width 50%
+  height 50%
+  text-align center
+  display flex
+  align-items center
+  justify-content center
+  flex-direction column
+
+@media (orientation:portrait)
+  .main
+    width 100vw
+    height 100vh
+  .block
+    display none
